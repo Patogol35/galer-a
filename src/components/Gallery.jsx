@@ -1,11 +1,11 @@
-  import { Grid, Container } from "@mui/material";
+import { Grid, Container, Typography, Box, Button } from "@mui/material";
 import { useState, useMemo, useEffect } from "react";
 import ArtworkCard from "./ArtworkCard";
 import ArtworkModal from "./ArtworkModal";
 import FilterBar from "./FilterBar";
 import artworks from "../data/artworks.json";
 
-export default function Gallery({ onlyFavorites = false }) {
+export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
   const [selectedArtwork, setSelectedArtwork] = useState(null);
   const [filter, setFilter] = useState("Todos");
   const [search, setSearch] = useState("");
@@ -84,19 +84,45 @@ export default function Gallery({ onlyFavorites = false }) {
         />
       )}
 
-      {/* Grid de obras */}
-      <Grid container spacing={3}>
-        {filteredArtworks.map((art) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={art.id}>
-            <ArtworkCard
-              artwork={art}
-              onClick={setSelectedArtwork}
-              isFavorite={favorites.includes(art.id)}
-              toggleFavorite={toggleFavorite}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {/* Si favoritos está vacío */}
+      {onlyFavorites && filteredArtworks.length === 0 ? (
+        <Box
+          sx={{
+            textAlign: "center",
+            mt: 10,
+            color: "text.secondary",
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
+            ⭐ Aún no tienes favoritos
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            Explora la galería y marca tus obras favoritas para verlas aquí.
+          </Typography>
+
+          {/* Botón para volver a la galería */}
+          <Button
+            variant="contained"
+            onClick={onGoToGallery}
+            sx={{ mt: 2, borderRadius: "20px", px: 3 }}
+          >
+            Ir a la Galería 🎨
+          </Button>
+        </Box>
+      ) : (
+        <Grid container spacing={3}>
+          {filteredArtworks.map((art) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={art.id}>
+              <ArtworkCard
+                artwork={art}
+                onClick={setSelectedArtwork}
+                isFavorite={favorites.includes(art.id)}
+                toggleFavorite={toggleFavorite}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
 
       {/* Modal */}
       <ArtworkModal
