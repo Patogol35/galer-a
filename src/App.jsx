@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -7,6 +7,12 @@ import Gallery from "./components/Gallery";
 
 export default function App() {
   const [mode, setMode] = useState("light");
+
+  // Cargar preferencia de tema desde localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem("themeMode");
+    if (savedMode) setMode(savedMode);
+  }, []);
 
   const theme = useMemo(
     () =>
@@ -26,7 +32,11 @@ export default function App() {
   );
 
   const toggleTheme = () => {
-    setMode((prev) => (prev === "light" ? "dark" : "light"));
+    setMode((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      localStorage.setItem("themeMode", next);
+      return next;
+    });
   };
 
   return (
@@ -38,7 +48,7 @@ export default function App() {
             <Typography variant="h6" fontWeight="bold">
               🎨 Galería de Arte
             </Typography>
-            <IconButton onClick={toggleTheme} color="inherit">
+            <IconButton onClick={toggleTheme} color="inherit" aria-label="cambiar tema">
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </IconButton>
           </Toolbar>
