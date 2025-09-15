@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "La Noche Estrellada",
+    "artist": "Vincent van Gogh",
+    "year": 1889,
+    "category": "Pintura",
+    "image": "https://uploads6.wikiart.org/images/vincent-van-gogh/starry-night.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Mona Lisa",
+    "artist": "Leonardo da Vinci",
+    "year": 1503,
+    "category": "Retrato",
+    "image": "https://uploads8.wikiart.org/images/leonardo-da-vinci/mona-lisa.jpg"
+  },
+  {
+    "id": 3,
+    "title": "El Grito",
+    "artist": "Edvard Munch",
+    "year": 1893,
+    "category": "Expresionismo",
+    "image": "https://uploads0.wikiart.org/images/edvard-munch/the-scream.jpg"
+  },
+  {
+    "id": 4,
+    "title": "La Persistencia de la Memoria",
+    "artist": "Salvador Dalí",
+    "year": 1931,
+    "category": "Surrealismo",
+    "image": "https://uploads5.wikiart.org/images/salvador-dali/the-persistence-of-memory-1931.jpg"
+  }
+]
