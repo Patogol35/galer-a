@@ -12,11 +12,13 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
   const [sort, setSort] = useState("none");
   const [favorites, setFavorites] = useState([]);
 
+  // Cargar favoritos de localStorage
   useEffect(() => {
     const saved = localStorage.getItem("favorites");
     if (saved) setFavorites(JSON.parse(saved));
   }, []);
 
+  // Guardar favoritos en localStorage
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
@@ -27,22 +29,27 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
     );
   };
 
+  // Categorías únicas
   const categories = useMemo(
     () => [...new Set(artworks.map((art) => art.category))],
     []
   );
 
+  // Filtrar + buscar + ordenar
   const filteredArtworks = useMemo(() => {
     let result = artworks;
 
+    // Si está en modo "solo favoritos"
     if (onlyFavorites) {
       result = result.filter((art) => favorites.includes(art.id));
     } else {
+      // Filtro normal
       if (filter !== "Todos") {
         result = result.filter((art) => art.category === filter);
       }
     }
 
+    // Buscar
     if (search.trim() !== "") {
       const term = search.toLowerCase();
       result = result.filter(
@@ -52,6 +59,7 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
       );
     }
 
+    // Ordenar
     if (sort === "asc") {
       result = [...result].sort((a, b) => a.year - b.year);
     } else if (sort === "desc") {
@@ -63,6 +71,7 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
 
   return (
     <Container sx={{ py: 5 }}>
+      {/* Barra de filtros solo si NO estamos en la pestaña de favoritos */}
       {!onlyFavorites && (
         <FilterBar
           filter={filter}
@@ -75,6 +84,7 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
         />
       )}
 
+      {/* Si favoritos está vacío */}
       {onlyFavorites && filteredArtworks.length === 0 ? (
         <Box
           sx={{
@@ -89,6 +99,8 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
           <Typography variant="body2" gutterBottom>
             Explora la galería y marca tus obras favoritas para verlas aquí.
           </Typography>
+
+          {/* Botón para volver a la galería */}
           <Button
             variant="contained"
             onClick={onGoToGallery}
@@ -112,6 +124,7 @@ export default function Gallery({ onlyFavorites = false, onGoToGallery }) {
         </Grid>
       )}
 
+      {/* Modal */}
       <ArtworkModal
         open={Boolean(selectedArtwork)}
         artwork={selectedArtwork}
