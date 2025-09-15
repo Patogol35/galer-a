@@ -1,5 +1,5 @@
 import { Grid, Container } from "@mui/material";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import ArtworkCard from "./ArtworkCard";
 import ArtworkModal from "./ArtworkModal";
 import FilterBar from "./FilterBar";
@@ -10,6 +10,24 @@ export default function Gallery() {
   const [filter, setFilter] = useState("Todos");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("none");
+  const [favorites, setFavorites] = useState([]);
+
+  // Cargar favoritos de localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("favorites");
+    if (saved) setFavorites(JSON.parse(saved));
+  }, []);
+
+  // Guardar favoritos en localStorage
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
+    );
+  };
 
   // Categorías únicas
   const categories = useMemo(
@@ -21,7 +39,9 @@ export default function Gallery() {
   const filteredArtworks = useMemo(() => {
     let result = artworks;
 
-    if (filter !== "Todos") {
+    if (filter === "Favoritos") {
+      result = result.filter((art) => favorites.includes(art.id));
+    } else if (filter !== "Todos") {
       result = result.filter((art) => art.category === filter);
     }
 
@@ -41,7 +61,7 @@ export default function Gallery() {
     }
 
     return result;
-  }, [filter, search, sort]);
+  }, [filter, search, sort, favorites]);
 
   return (
     <Container sx={{ py: 5 }}>
@@ -60,7 +80,12 @@ export default function Gallery() {
       <Grid container spacing={3}>
         {filteredArtworks.map((art) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={art.id}>
-            <ArtworkCard artwork={art} onClick={setSelectedArtwork} />
+            <ArtworkCard
+              artwork={art}
+              onClick={setSelectedArtwork}
+              isFavorite={favorites.includes(art.id)}
+              toggleFavorite={toggleFavorite}
+            />
           </Grid>
         ))}
       </Grid>
