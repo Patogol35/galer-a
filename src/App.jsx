@@ -79,10 +79,10 @@ export default function App() {
         {tab === 1 && (
           <Gallery
             onlyFavorites
-            onGoToGallery={() => setTab(0)}
+            onGoToGallery={() => setTab(0)} // callback para botón "Ir a la Galería"
           />
         )}
       </Box>
     </ThemeProvider>
   );
-        }
+            }
