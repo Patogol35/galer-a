@@ -12,6 +12,7 @@ export default function FilterBar({ filter, setFilter, categories, search, setSe
           label="Categoría"
         >
           <MenuItem value="Todos">Todos</MenuItem>
+          <MenuItem value="Favoritos">❤️ Favoritos</MenuItem>
           {categories.map((cat, idx) => (
             <MenuItem key={idx} value={cat}>{cat}</MenuItem>
           ))}
