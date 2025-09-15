@@ -1,19 +1,25 @@
-import { useState, useMemo, useEffect } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline, AppBar, Toolbar, Typography, IconButton, Box, Tabs, Tab } from "@mui/material";
+import { useState, useMemo } from "react";
+import {
+  createTheme,
+  ThemeProvider,
+} from "@mui/material/styles";
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  Tabs,
+  Tab,
+} from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import Gallery from "./components/Gallery";
 
 export default function App() {
   const [mode, setMode] = useState("light");
-  const [tab, setTab] = useState(0); // 0 = galería, 1 = favoritos
-
-  // Cargar tema guardado
-  useEffect(() => {
-    const savedMode = localStorage.getItem("themeMode");
-    if (savedMode) setMode(savedMode);
-  }, []);
+  const [tab, setTab] = useState(0); // 0 = Galería, 1 = Favoritos
 
   const theme = useMemo(
     () =>
@@ -33,46 +39,50 @@ export default function App() {
   );
 
   const toggleTheme = () => {
-    setMode((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-      localStorage.setItem("themeMode", next);
-      return next;
-    });
+    setMode((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const handleChangeTab = (_, newValue) => {
+    setTab(newValue);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ minHeight: "100vh" }}>
+        {/* Navbar */}
         <AppBar position="static" elevation={2}>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h6" fontWeight="bold">
               🎨 Galería de Arte
             </Typography>
-
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Tabs
-                value={tab}
-                onChange={(e, newValue) => setTab(newValue)}
-                textColor="inherit"
-                indicatorColor="secondary"
-                sx={{ mr: 2 }}
-              >
-                <Tab label="Galería" />
-                <Tab label="Favoritos ❤️" />
-              </Tabs>
-
-              <IconButton onClick={toggleTheme} color="inherit" aria-label="cambiar tema">
-                {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-              </IconButton>
-            </Box>
+            <IconButton onClick={toggleTheme} color="inherit">
+              {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
           </Toolbar>
+
+          {/* Tabs */}
+          <Tabs
+            value={tab}
+            onChange={handleChangeTab}
+            centered
+            textColor="inherit"
+            indicatorColor="secondary"
+          >
+            <Tab label="Galería" />
+            <Tab label="Favoritos" />
+          </Tabs>
         </AppBar>
 
-        {/* Render según pestaña */}
-        {tab === 0 && <Gallery onlyFavorites={false} />}
-        {tab === 1 && <Gallery onlyFavorites={true} />}
+        {/* Contenido */}
+        {tab === 0 && <Gallery />}
+        {tab === 1 && (
+          <Gallery
+            onlyFavorites
+            onGoToGallery={() => setTab(0)} // callback para botón "Ir a la Galería"
+          />
+        )}
       </Box>
     </ThemeProvider>
   );
-              }
+}
