@@ -1,11 +1,11 @@
-import { Grid, Container } from "@mui/material";
+  import { Grid, Container } from "@mui/material";
 import { useState, useMemo, useEffect } from "react";
 import ArtworkCard from "./ArtworkCard";
 import ArtworkModal from "./ArtworkModal";
 import FilterBar from "./FilterBar";
 import artworks from "../data/artworks.json";
 
-export default function Gallery() {
+export default function Gallery({ onlyFavorites = false }) {
   const [selectedArtwork, setSelectedArtwork] = useState(null);
   const [filter, setFilter] = useState("Todos");
   const [search, setSearch] = useState("");
@@ -39,12 +39,17 @@ export default function Gallery() {
   const filteredArtworks = useMemo(() => {
     let result = artworks;
 
-    if (filter === "Favoritos") {
+    // Si está en modo "solo favoritos"
+    if (onlyFavorites) {
       result = result.filter((art) => favorites.includes(art.id));
-    } else if (filter !== "Todos") {
-      result = result.filter((art) => art.category === filter);
+    } else {
+      // Filtro normal
+      if (filter !== "Todos") {
+        result = result.filter((art) => art.category === filter);
+      }
     }
 
+    // Buscar
     if (search.trim() !== "") {
       const term = search.toLowerCase();
       result = result.filter(
@@ -54,6 +59,7 @@ export default function Gallery() {
       );
     }
 
+    // Ordenar
     if (sort === "asc") {
       result = [...result].sort((a, b) => a.year - b.year);
     } else if (sort === "desc") {
@@ -61,20 +67,22 @@ export default function Gallery() {
     }
 
     return result;
-  }, [filter, search, sort, favorites]);
+  }, [filter, search, sort, favorites, onlyFavorites]);
 
   return (
     <Container sx={{ py: 5 }}>
-      {/* Barra de filtros */}
-      <FilterBar
-        filter={filter}
-        setFilter={setFilter}
-        categories={categories}
-        search={search}
-        setSearch={setSearch}
-        sort={sort}
-        setSort={setSort}
-      />
+      {/* Barra de filtros solo si NO estamos en la pestaña de favoritos */}
+      {!onlyFavorites && (
+        <FilterBar
+          filter={filter}
+          setFilter={setFilter}
+          categories={categories}
+          search={search}
+          setSearch={setSearch}
+          sort={sort}
+          setSort={setSort}
+        />
+      )}
 
       {/* Grid de obras */}
       <Grid container spacing={3}>
