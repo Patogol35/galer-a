@@ -1,45 +1,30 @@
-import { Dialog, DialogContent, Typography, IconButton, Box } from "@mui/material";
+import { Dialog, DialogContent, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function ArtworkModal({ open, artwork, onClose }) {
   if (!artwork) return null;
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth="md">
       <DialogContent sx={{ position: "relative", p: 3 }}>
         <IconButton
           onClick={onClose}
-          sx={{
-            position: "absolute",
-            top: 10,
-            right: 10,
-            bgcolor: "background.paper",
-          }}
+          sx={{ position: "absolute", top: 10, right: 10 }}
+          aria-label="cerrar"
         >
           <CloseIcon />
         </IconButton>
-
-        <Box
-          component="img"
+        <img
           src={artwork.image}
           alt={artwork.title}
-          sx={{
-            width: "100%",
-            maxHeight: "70vh",
-            objectFit: "contain",
-            borderRadius: "12px",
-            boxShadow: 3,
-            mb: 2,
-          }}
+          style={{ width: "100%", borderRadius: "12px", objectFit: "cover" }}
+          loading="lazy"
         />
-
-        <Typography variant="h4" fontWeight="bold" gutterBottom>
-          {artwork.title}
-        </Typography>
-        <Typography variant="h6" color="text.secondary" gutterBottom>
+        <Typography variant="h5" fontWeight="bold" mt={2}>{artwork.title}</Typography>
+        <Typography variant="body1" color="text.secondary">
           {artwork.artist} ({artwork.year})
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" mt={1}>
           Categoría: {artwork.category}
         </Typography>
       </DialogContent>
