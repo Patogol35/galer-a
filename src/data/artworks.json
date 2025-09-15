@@ -5,7 +5,7 @@
     "artist": "Vincent van Gogh",
     "year": 1889,
     "category": "Pintura",
-    "image": "https://uploads6.wikiart.org/images/vincent-van-gogh/starry-night.jpg"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "artist": "Leonardo da Vinci",
     "year": 1503,
     "category": "Retrato",
-    "image": "https://uploads8.wikiart.org/images/leonardo-da-vinci/mona-lisa.jpg"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/600px-Mona_Lisa.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "artist": "Edvard Munch",
     "year": 1893,
     "category": "Expresionismo",
-    "image": "https://uploads0.wikiart.org/images/edvard-munch/the-scream.jpg"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/600px-The_Scream.jpg"
   },
   {
     "id": 4,
@@ -29,6 +29,6 @@
     "artist": "Salvador Dalí",
     "year": 1931,
     "category": "Surrealismo",
-    "image": "https://uploads5.wikiart.org/images/salvador-dali/the-persistence-of-memory-1931.jpg"
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg"
   }
 ]
