@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node generateArtworks.js",
+    "prebuild": "node generateArtworks.cjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
