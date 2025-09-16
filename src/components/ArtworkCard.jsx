@@ -1,13 +1,30 @@
-import { Card, CardActionArea, CardMedia, CardContent, Typography, IconButton, Box } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { motion } from "framer-motion";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function ArtworkCard({ artwork, onClick, isFavorite, toggleFavorite }) {
+export default function ArtworkCard({
+  artwork,
+  onClick,
+  isFavorite,
+  toggleFavorite,
+}) {
   return (
     <motion.div whileHover={{ scale: 1.05 }}>
       <Card
-        sx={{ borderRadius: "20px", boxShadow: 4, overflow: "hidden", position: "relative" }}
+        sx={{
+          borderRadius: "20px",
+          boxShadow: 4,
+          overflow: "hidden",
+          position: "relative",
+        }}
       >
         {/* Botón de favorito */}
         <IconButton
@@ -39,7 +56,9 @@ export default function ArtworkCard({ artwork, onClick, isFavorite, toggleFavori
             style={{ objectFit: "cover" }}
           />
           <CardContent>
-            <Typography variant="h6" fontWeight="bold">{artwork.title}</Typography>
+            <Typography variant="h6" fontWeight="bold">
+              {artwork.title}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
               {artwork.artist} • {artwork.year}
             </Typography>
