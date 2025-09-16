@@ -1,34 +1,66 @@
 [
   {
     "id": 1,
-    "title": "La Noche Estrellada",
+    "title": "La noche estrellada",
     "artist": "Vincent van Gogh",
     "year": 1889,
-    "category": "Pintura",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+    "category": "Postimpresionismo",
+    "image": "https://uploads6.wikiart.org/images/vincent-van-gogh/the-starry-night-1889.jpg"
   },
   {
     "id": 2,
-    "title": "Mona Lisa",
-    "artist": "Leonardo da Vinci",
-    "year": 1503,
-    "category": "Retrato",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/600px-Mona_Lisa.jpg"
+    "title": "La joven de la perla",
+    "artist": "Johannes Vermeer",
+    "year": 1665,
+    "category": "Barroco",
+    "image": "https://uploads4.wikiart.org/images/johannes-vermeer/girl-with-a-pearl-earring.jpg"
   },
   {
     "id": 3,
-    "title": "El Grito",
-    "artist": "Edvard Munch",
-    "year": 1893,
-    "category": "Expresionismo",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/The_Scream.jpg/600px-The_Scream.jpg"
+    "title": "Guernica",
+    "artist": "Pablo Picasso",
+    "year": 1937,
+    "category": "Cubismo",
+    "image": "https://uploads2.wikiart.org/images/pablo-picasso/guernica-1937.jpg"
   },
   {
     "id": 4,
-    "title": "La Persistencia de la Memoria",
+    "title": "El nacimiento de Venus",
+    "artist": "Sandro Botticelli",
+    "year": 1486,
+    "category": "Renacimiento",
+    "image": "https://uploads8.wikiart.org/images/sandro-botticelli/the-birth-of-venus.jpg"
+  },
+  {
+    "id": 5,
+    "title": "La persistencia de la memoria",
     "artist": "Salvador Dalí",
     "year": 1931,
     "category": "Surrealismo",
-    "image": "https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg"
+    "image": "https://uploads0.wikiart.org/images/salvador-dali/the-persistence-of-memory-1931.jpg"
+  },
+  {
+    "id": 6,
+    "title": "La Gioconda",
+    "artist": "Leonardo da Vinci",
+    "year": 1503,
+    "category": "Renacimiento",
+    "image": "https://uploads1.wikiart.org/images/leonardo-da-vinci/mona-lisa.jpg"
+  },
+  {
+    "id": 7,
+    "title": "El grito",
+    "artist": "Edvard Munch",
+    "year": 1893,
+    "category": "Expresionismo",
+    "image": "https://uploads0.wikiart.org/images/edvard-munch/the-scream-1893.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Las meninas",
+    "artist": "Diego Velázquez",
+    "year": 1656,
+    "category": "Barroco",
+    "image": "https://uploads0.wikiart.org/images/diego-velazquez/las-meninas-1656.jpg"
   }
 ]
