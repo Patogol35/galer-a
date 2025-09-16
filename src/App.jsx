@@ -1,88 +1,57 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
-  createTheme,
-  ThemeProvider,
-} from "@mui/material/styles";
-import {
-  CssBaseline,
   AppBar,
   Toolbar,
   Typography,
   IconButton,
-  Box,
-  Tabs,
-  Tab,
+  Container,
+  Button,
 } from "@mui/material";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HomeIcon from "@mui/icons-material/Home";
 import Gallery from "./components/Gallery";
 
 export default function App() {
-  const [mode, setMode] = useState("light");
-  const [tab, setTab] = useState(0); // 0 = Galería, 1 = Favoritos
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-          ...(mode === "light"
-            ? {
-                background: { default: "#f5f5f5", paper: "#ffffff" },
-              }
-            : {
-                background: { default: "#121212", paper: "#1e1e1e" },
-              }),
-        },
-      }),
-    [mode]
-  );
-
-  const toggleTheme = () => {
-    setMode((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
-  const handleChangeTab = (_, newValue) => {
-    setTab(newValue);
-  };
+  const [showFavorites, setShowFavorites] = useState(false);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{ minHeight: "100vh" }}>
-        {/* Navbar */}
-        <AppBar position="static" elevation={2}>
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography variant="h6" fontWeight="bold">
-              🎨 Galería de Arte
-            </Typography>
-            <IconButton onClick={toggleTheme} color="inherit">
-              {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-            </IconButton>
-          </Toolbar>
+    <>
+      {/* Navbar */}
+      <AppBar position="sticky" sx={{ borderRadius: 0 }}>
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            🎨 Mi Galería de Arte
+          </Typography>
 
-          {/* Tabs */}
-          <Tabs
-            value={tab}
-            onChange={handleChangeTab}
-            centered
-            textColor="inherit"
-            indicatorColor="secondary"
+          <IconButton
+            color="inherit"
+            onClick={() => setShowFavorites(false)}
+            aria-label="galería"
           >
-            <Tab label="Galería" />
-            <Tab label="Favoritos" />
-          </Tabs>
-        </AppBar>
+            <HomeIcon />
+          </IconButton>
 
-        {/* Contenido */}
-        {tab === 0 && <Gallery />}
-        {tab === 1 && (
+          <IconButton
+            color="inherit"
+            onClick={() => setShowFavorites(true)}
+            aria-label="favoritos"
+          >
+            <FavoriteIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Contenido principal */}
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
+        {showFavorites ? (
           <Gallery
             onlyFavorites
-            onGoToGallery={() => setTab(0)} // callback para botón "Ir a la Galería"
+            onGoToGallery={() => setShowFavorites(false)}
           />
+        ) : (
+          <Gallery />
         )}
-      </Box>
-    </ThemeProvider>
+      </Container>
+    </>
   );
-            }
+}
