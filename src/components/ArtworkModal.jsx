@@ -17,10 +17,16 @@ export default function ArtworkModal({ open, artwork, onClose }) {
         <img
           src={artwork.image}
           alt={artwork.title}
-          style={{ width: "100%", borderRadius: "12px", objectFit: "cover" }}
+          style={{
+            width: "100%",
+            borderRadius: "12px",
+            objectFit: "cover",
+          }}
           loading="lazy"
         />
-        <Typography variant="h5" fontWeight="bold" mt={2}>{artwork.title}</Typography>
+        <Typography variant="h5" fontWeight="bold" mt={2}>
+          {artwork.title}
+        </Typography>
         <Typography variant="body1" color="text.secondary">
           {artwork.artist} ({artwork.year})
         </Typography>
