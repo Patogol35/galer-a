@@ -1,8 +1,31 @@
-import { Box, FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField,
+} from "@mui/material";
 
-export default function FilterBar({ filter, setFilter, categories, search, setSearch, sort, setSort }) {
+export default function FilterBar({
+  filter,
+  setFilter,
+  categories,
+  search,
+  setSearch,
+  sort,
+  setSort,
+}) {
   return (
-    <Box sx={{ mb: 4, display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
+    <Box
+      sx={{
+        mb: 4,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 2,
+        justifyContent: "center",
+      }}
+    >
       {/* Filtro por categoría */}
       <FormControl sx={{ minWidth: 160 }}>
         <InputLabel>Categoría</InputLabel>
@@ -12,9 +35,10 @@ export default function FilterBar({ filter, setFilter, categories, search, setSe
           label="Categoría"
         >
           <MenuItem value="Todos">Todos</MenuItem>
-          <MenuItem value="Favoritos">❤️ Favoritos</MenuItem>
           {categories.map((cat, idx) => (
-            <MenuItem key={idx} value={cat}>{cat}</MenuItem>
+            <MenuItem key={idx} value={cat}>
+              {cat}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
